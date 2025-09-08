@@ -48,7 +48,7 @@ pipeline {
             steps {
                 sh '''
                     docker run --rm \
-                      -e SONAR_HOST_URL=http://localhost:9000 \
+                      -e SONAR_HOST_URL=172.17.0.3:9000 \
                       -e SONAR_LOGIN=sqp_6dc766e50f3313d6e7d1bb73818778d415da6a15 \
                       -v $(pwd):/usr/src \
                       sonarsource/sonar-scanner-cli  
