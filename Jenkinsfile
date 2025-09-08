@@ -57,12 +57,6 @@ pipeline {
 
 
         stage('Build Docker Image') {
-            agent {
-                docker {
-                    image 'docker:latest'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
-                }
-            }
             steps {
                 sh 'docker build -t fastapi-app:latest .'
             }
@@ -70,13 +64,7 @@ pipeline {
 
         stage('Deploy Container') {
             steps {
-                sh '''
-                docker run -d \
-                  -p 8080:8000 \  # เปลี่ยนพอร์ต host:container ตามต้องการ
-                  -e ENV_NAME=production \  # เพิ่ม environment variable
-                  --name fastapi-app \
-                  fastapi-app:latest
-                '''
+                sh 'docker run -d -p 8000:8000 fastapi-app:latest'
             }
         }
     }
