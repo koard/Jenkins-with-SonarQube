@@ -48,7 +48,6 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 sh '''
-                pip install pysonar
                 pysonar \
                 --sonar-host-url=http://172.17.0.3:9000 \
                 --sonar-token=$SONAR_TOKEN \
