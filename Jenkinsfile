@@ -48,10 +48,10 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 sh '''
-                pysonar \
-                --sonar-host-url=http://172.17.0.3:9000 \
-                --sonar-token=$SONAR_TOKEN \
-                --sonar-project-key=FastAPI
+                sonar-scanner \
+                -Dsonar.host.url=http://172.17.0.3:9000 \
+                -Dsonar.login=sqp_693bd17da4a05b8f7bf30d01b6d1b9599c264a9a \
+                -Dsonar.projectKey=FastAPI
                 '''
             }
         }
