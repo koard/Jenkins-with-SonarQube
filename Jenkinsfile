@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/koard/Jenkins-with-SonarQube.git'
+                git branch: 'feature', url: 'https://github.com/koard/Jenkins-with-SonarQube.git'
             }
         }
 
