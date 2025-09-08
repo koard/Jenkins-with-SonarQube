@@ -50,7 +50,6 @@ pipeline {
             sh "${scannerHome}/bin/sonar-scanner"
             }
         }
-        }
 
 
         stage('Build Docker Image') {
