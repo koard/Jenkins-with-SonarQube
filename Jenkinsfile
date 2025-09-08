@@ -45,9 +45,13 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'sonar-scanner' // 'Sonarscanner' คือชื่อที่ตั้งไว้ใน Jenkins > Manage Jenkins > Tools
-            withSonarQubeEnv() { // หรือใส่ชื่อ server เช่น withSonarQubeEnv('MySonarQube')
-            sh "${scannerHome}/bin/sonar-scanner"
+            steps {
+                script {
+                    def scannerHome = tool 'SonarScanner'
+                    withSonarQubeEnv() {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
             }
         }
 
