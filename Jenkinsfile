@@ -45,15 +45,11 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            steps {
-                sh '''
-                    docker run --rm \
-                      -e SONAR_HOST_URL=http://172.17.0.3:9000 \
-                      -e SONAR_LOGIN=sqp_693bd17da4a05b8f7bf30d01b6d1b9599c264a9a \
-                      -v $(pwd):/usr/src \
-                      sonarsource/sonar-scanner-cli  
-                '''
+            def scannerHome = tool 'sonar-scanner' // 'Sonarscanner' คือชื่อที่ตั้งไว้ใน Jenkins > Manage Jenkins > Tools
+            withSonarQubeEnv() { // หรือใส่ชื่อ server เช่น withSonarQubeEnv('MySonarQube')
+            sh "${scannerHome}/bin/sonar-scanner"
             }
+        }
         }
 
 
