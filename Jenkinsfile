@@ -38,6 +38,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
+                export PYTHONPATH=$PWD
                 pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml
                 '''
             }
