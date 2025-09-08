@@ -15,7 +15,7 @@ pipeline {
         stage('Setup Python & Install Dependencies') {
             agent {
                 docker {
-                    image 'python-docker:3.11'
+                    image 'python:3.11'
                 }
             }
             steps {
@@ -32,7 +32,7 @@ pipeline {
         stage('Run Tests & Generate Coverage') {
             agent {
                 docker {
-                    image 'python-docker:3.11'
+                    image 'python:3.11'
                 }
             }
             steps {
