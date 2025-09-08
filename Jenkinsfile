@@ -25,7 +25,6 @@ pipeline {
                 pip install --upgrade pip
                 pip install -r requirements.txt
                 pip install pytest pytest-cov
-                pip install pysonar
                 '''
             }
         }
@@ -48,13 +47,15 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 sh '''
-                sonar-scanner \
-                -Dsonar.host.url=http://172.17.0.3:9000 \
-                -Dsonar.login=sqp_693bd17da4a05b8f7bf30d01b6d1b9599c264a9a \
-                -Dsonar.projectKey=FastAPI
+                    docker run --rm \
+                      -e SONAR_HOST_URL=http://172.17.0.3:9000 \
+                      -e SONAR_LOGIN=sqp_eb7b5bb7e277b631cb405148bd3a50bf6c239a6c \
+                      -v $(pwd):/usr/src \
+                      sonarsource/sonar-scanner-cli  
                 '''
             }
         }
+
 
         stage('Build Docker Image') {
             steps {
